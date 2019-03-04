@@ -68,7 +68,12 @@ public class Menu {
 	
 	
 	
-	
+	public MenuIterator getAllItemsIterator()   // factory method  
+	  {
+		
+		return new AllItemsIterator();  
+		  
+	  }
 	
 	
 	
@@ -95,9 +100,10 @@ public class Menu {
 	
 
 	
-	public boolean add(MenuItem item) {
+	public boolean add(String Name, int Category, boolean Heart, double Price) {
 		// TODO Auto-generated method stub
 		
+		MenuItem item = new MenuItem(Name, Category, Heart, Price);
 		Node node = new Node(item,null);
 		
 		if(tail == null) {
@@ -112,28 +118,32 @@ public class Menu {
 	}
 
 	
-	public void delete(AllItemsIterator iterator) {
-		// TODO Auto-generated method stub
+	public void delete(MenuItem item) {
+		// TODO Auto-generated method stub}
 		
-		
-		AllItemsIterator tempItr = new AllItemsIterator();
-		
-		// start at the begining of the linked list to find the previous node to the one that stores the menu item to be deleted.
-		while( (! tempItr.cursor.getNext().equals(iterator)) && (tempItr.hasNext())) {
-			tempItr.next();
-			
-		}
-		
-		// remove the node, that stores the menu item to be removed, by setting the previous node's next field, previous to the node to be removed, 
-		//to the next node past the node to be removed.
-		
-		Node temp = head; 
-		while (temp != null && temp != tempItr.cursor) 
-        {  
+		// Store head node 
+        Node temp = head, prev = null; 
+  
+        // If head node itself holds the key to be deleted 
+        if (temp != null && temp.data.getName().contentEquals(item.getName())) 
+        { 
+            head = temp.next; // Changed head 
+            return; 
+        } 
+  
+        // Search for the key to be deleted, keep track of the 
+        // previous node as we need to change temp.next 
+        while (temp != null && !temp.data.getName().contentEquals(item.getName())) 
+        { 
+            prev = temp; 
             temp = temp.next; 
-        }
-		
-		temp.next = iterator.cursor.getNext();
+        }     
+  
+        // If key was not present in linked list 
+        if (temp == null) return; 
+  
+        // Unlink the node from linked list 
+        prev.next = temp.next;
 	}
 	
 	
@@ -164,11 +174,6 @@ public class Menu {
 			MenuItem item = cursor.getData();
 			cursor = cursor.getNext();
 			return item;
-		}
-		
-		public Node getCursor() {
-			
-			return cursor;
 		}
 			
 	}
