@@ -15,7 +15,7 @@ public class Client {
 		eatAtJoesMenu.add("Rice Pudding", Menu.DESSERT, Menu.NOT_HEART_HEALTHY, 3.50);
 		
 		MenuIterator itr1 = eatAtJoesMenu.getAllItemsIterator();
-		MenuIterator itr2 = eatAtJoesMenu.getAllItemsIterator();
+		
 		
 		while(itr1.hasNext()) {
 			
@@ -25,7 +25,7 @@ public class Client {
 			
 		}
 		
-		
+		MenuIterator itr2 = eatAtJoesMenu.getAllItemsIterator();
 		while(itr2.hasNext()) {
 			
 			System.out.println(itr2.next().getName());
