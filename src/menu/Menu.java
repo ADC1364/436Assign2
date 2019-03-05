@@ -76,7 +76,12 @@ public class Menu {
 	  }
 	
 	
-	
+	public MenuIterator getItemIterator(int selectedCategory)   // factory method  
+	  {
+		
+		return new ItemIterator(selectedCategory);  
+		  
+	  }
 	
 	
 	
@@ -176,6 +181,45 @@ public class Menu {
 			return item;
 		}
 			
+	}
+	
+	
+	private class ItemIterator implements MenuIterator{
+		
+		private Node cursor;
+		
+		private int selectedCat;
+		
+		public ItemIterator(int Category) {
+			
+			cursor = head;
+			selectedCat = Category;
+		}
+
+		@Override
+		public boolean hasNext() {
+			// TODO Auto-generated method stub
+			return (cursor != null);
+		}
+
+		@Override
+		public MenuItem next() {
+			// TODO Auto-generated method stub
+			if(!hasNext()) {
+				return null;
+			}
+			MenuItem item = cursor.getData();
+			while( item.getCategory() != selectedCat) {
+				cursor = cursor.getNext();
+				item = cursor.getData();
+				
+			}
+			
+				cursor = cursor.getNext();
+				return item;
+				
+		}
+		
 	}
 
 }
