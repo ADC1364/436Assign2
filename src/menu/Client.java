@@ -13,29 +13,73 @@ public class Client {
 		Menu eatAtJoesMenu = new Menu();
 		eatAtJoesMenu.add("Lobster Dinner", Menu.MAIN_DISH, Menu.NOT_HEART_HEALTHY, 24.99); 
 		eatAtJoesMenu.add("Rice Pudding", Menu.DESSERT, Menu.NOT_HEART_HEALTHY, 3.50);
+		eatAtJoesMenu.add("burger", Menu.MAIN_DISH, Menu.NOT_HEART_HEALTHY, 24.99); 
+		eatAtJoesMenu.add("fries", Menu.APPETIZERS, Menu.NOT_HEART_HEALTHY, 3.50);
+		eatAtJoesMenu.add("shake", Menu.DESSERT, Menu.HEART_HEALTHY, 3.50);
 		
-		MenuIterator itr1 = eatAtJoesMenu.getItemIterator(Menu.DESSERT);
+		MenuIterator itr1 = eatAtJoesMenu.getPriceIterator(24.99);
 		
+		MenuIterator itr2 = eatAtJoesMenu.getHeartHealthyIterator();
 		
-		//while(itr1.hasNext()) {
+		MenuIterator itr3 = eatAtJoesMenu.getItemIterator(Menu.MAIN_DISH);
+		
+		MenuIterator itr4 = eatAtJoesMenu.getAllItemsIterator();
+		
+		int option = 4;
+		
+		switch(option) {
+		case 1 :
+			try {
+				while(itr1.hasNext()) {
 			
-		//	MenuItem item = itr1.next();
-		//	if(item.getName().contentEquals("Rice Pudding"))
-		//		eatAtJoesMenu.delete(item);
-			
-		//}
+					System.out.println(itr1.next().getName());
+				}
+			}
+			catch(NullPointerException e) {
+				System.out.println("There are no items left under that price.");
+			}
+			break;
 		
-		MenuIterator itr2 = eatAtJoesMenu.getAllItemsIterator();
-		while(itr1.hasNext()) {
-			
-			System.out.println(itr1.next().getName());
+		
+		
+		case 2: 
+			try {
+				while(itr2.hasNext()) {
+				
+					System.out.println(itr2.next().getName());
+					}
+				}
+				catch(NullPointerException e) {
+					System.out.println("There are no healthy items left.");
+				}
+			break;
+		
+		case 3:
+			try {
+				while(itr3.hasNext()) {
+				
+					System.out.println(itr3.next().getName());
+					}
+				}
+				catch(NullPointerException e) {
+					System.out.println("There are no items left in that category.");
+				}
+			break;
+		
+		case 4:
+			try {
+				while(itr4.hasNext()) {
+				
+					System.out.println(itr4.next().getName());
+					}
+				}
+				catch(NullPointerException e) {
+					System.out.println("There are no more items left.");
+				}
+			break;
 		}
 		
 		
-		
-		
-	
-
 	}
 
 }

@@ -32,7 +32,6 @@ public class MenuItem {
 	
 	// getter and setter methods for name field
 	public String getName () {
-		
 		return this.name;
 		
 	}
