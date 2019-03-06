@@ -25,6 +25,10 @@ public class Client {
 		
 		MenuIterator itr4 = eatAtJoesMenu.getAllItemsIterator();
 		
+		MenuIterator itr5 = eatAtJoesMenu.getAllItemsIterator();
+		
+		MenuIterator itr6 = eatAtJoesMenu.getAllItemsIterator();
+		
 		int option = 4;
 		
 		switch(option) {
@@ -79,6 +83,24 @@ public class Client {
 			break;
 		}
 		
+		System .out.println("Delete heart healthy Item");
+		// delete all menu items
+		while(itr5.hasNext()) {
+			
+			MenuItem dItem = itr5.next();
+			if(dItem.getHeart())
+				eatAtJoesMenu.delete(dItem);
+		}
+		
+		try {
+			while(itr6.hasNext()) {
+			
+				System.out.println(itr6.next().getName());
+				}
+			}
+			catch(NullPointerException e) {
+				System.out.println("There are no more items left.");
+			}
 		
 	}
 
