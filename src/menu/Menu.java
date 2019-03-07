@@ -203,7 +203,7 @@ public class Menu {
 	
 	private class ItemIterator implements MenuIterator{
 		
-		private Node cursor;
+		private Node cursor, temp;
 		
 		private int selectedCat;
 		
@@ -211,37 +211,37 @@ public class Menu {
 		
 		public ItemIterator( int selectedCategory) {
 			
-			cursor = head;
+			temp = head;
+			if(temp != null)
+				while(temp.data.getCategory() != selectedCategory) {
+					temp = temp.getNext();
+				
+					}
+				
+			cursor = temp;
 			selectedCat = selectedCategory;
 		}
 
 		@Override
 		public boolean hasNext() {
 			// TODO Auto-generated method stub
+			while((cursor!= null) && (cursor.data.getCategory() != selectedCat))
+				cursor = cursor.getNext();
 			return cursor != null;
+			
 		}
 
 		public MenuItem next() {
 			// TODO Auto-generated method stub
+			
 			if(!hasNext()) {
 				return null;
 			}
-			
-			while( (cursor.data.getCategory() != selectedCat) && (cursor.getNext() !=null) ) {
-				
-					cursor = cursor.getNext();
-					item = cursor.getData();
-			}
-			
-		
-				
-				if(cursor.data.getCategory() == selectedCat) {
-					item = cursor.data;
-					cursor = cursor.getNext();
-					return item;
-				}
-				else 
-					return null;
+			item = cursor.data;
+			cursor = cursor.getNext();
+			return item;
+					
+					
 			
 		}
 		
@@ -251,17 +251,25 @@ public class Menu {
 	// heart healthy iterator only return s
 	private class HeartHealthyIterator implements MenuIterator{
 		
-			private Node cursor;
+			private Node cursor, temp;
 			private MenuItem item;
 		
 			public HeartHealthyIterator() {
 			
-				cursor = head;
+				temp = head;
+				  while( (temp != null) && (!temp.data.getHeart()) ) {
+					  temp = temp.getNext();
+					
+				    }
+					
+					cursor = temp;
 			}
 
 			@Override
 			public boolean hasNext() {
 				// TODO Auto-generated method stub
+				while((cursor!= null) && (!cursor.data.getHeart()))
+					cursor = cursor.getNext();
 				return cursor != null;
 			}
 
@@ -271,22 +279,9 @@ public class Menu {
 				if(!hasNext()) {
 					return null;
 				}
-				
-				while( !cursor.data.getHeart() && cursor.getNext() !=null) {
-					
-						cursor = cursor.getNext();
-						item = cursor.getData();
-				}
-				
-			
-					
-					if(cursor.data.getHeart()) {
-						item = cursor.data;
-						cursor = cursor.getNext();
-						return item;
-					}
-					else 
-						return null;
+				item = cursor.data;
+				cursor = cursor.getNext();
+				return item;
 				
 			}
 		
@@ -296,15 +291,22 @@ public class Menu {
 	// price iterator only returns items that are above or equal to a certain price
 	private class PriceIterator implements MenuIterator{
 		
-			private Node cursor;
+			private Node cursor, temp;
 		
 			private double selectedPrice;
 			
 			private MenuItem item;
 		
 			public PriceIterator(double Price) {
-			
-				cursor = head;
+				
+				temp = head;
+				if(temp != null)
+					while(temp.data.getPrice() > Price) {
+						temp = temp.getNext();
+						}
+				
+				cursor = temp;
+				
 				selectedPrice = Price;
 		}
 			
@@ -312,31 +314,21 @@ public class Menu {
 		@Override
 		public boolean hasNext() {
 			// TODO Auto-generated method stub
+			while((cursor!= null) && (cursor.data.getPrice() > selectedPrice))
+				cursor = cursor.getNext();
 			return cursor != null;
 		}
 
 		@Override
 		public MenuItem next() {
 			// TODO Auto-generated method stub
+			// TODO Auto-generated method stub
 			if(!hasNext()) {
 				return null;
 			}
-			
-			while( (cursor.data.getPrice() < selectedPrice) && (cursor.getNext() !=null) ) {
-				
-					cursor = cursor.getNext();
-					item = cursor.getData();
-			}
-			
-		
-				
-				if(cursor.data.getPrice() >= selectedPrice) {
-					item = cursor.data;
-					cursor = cursor.getNext();
-					return item;
-				}
-				else 
-					return null;
+			item = cursor.data;
+			cursor = cursor.getNext();
+			return item;
 			
 		}
 

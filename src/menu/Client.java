@@ -15,87 +15,62 @@ public class Client {
 		eatAtJoesMenu.add("Rice Pudding", Menu.DESSERT, Menu.NOT_HEART_HEALTHY, 3.50);
 		eatAtJoesMenu.add("burger", Menu.MAIN_DISH, Menu.NOT_HEART_HEALTHY, 24.99); 
 		eatAtJoesMenu.add("fries", Menu.APPETIZERS, Menu.NOT_HEART_HEALTHY, 3.50);
-		eatAtJoesMenu.add("shake", Menu.DESSERT, Menu.HEART_HEALTHY, 3.50);
+		eatAtJoesMenu.add("shake", Menu.MAIN_DISH, Menu.HEART_HEALTHY, 10.50);
 		
-		MenuIterator itr1 = eatAtJoesMenu.getPriceIterator(24.99);
-		
-		MenuIterator itr2 = eatAtJoesMenu.getHeartHealthyIterator();
-		
-		MenuIterator itr3 = eatAtJoesMenu.getItemIterator(Menu.MAIN_DISH);
-		
-		MenuIterator itr4 = eatAtJoesMenu.getAllItemsIterator();
-		
-		MenuIterator itr5 = eatAtJoesMenu.getAllItemsIterator();
-		
-		MenuIterator itr6 = eatAtJoesMenu.getAllItemsIterator();
-		
-		int option = 4;
+		MenuIterator itr;
+		int option = 1;
 		
 		switch(option) {
 		case 1 :
-			try {
-				while(itr1.hasNext()) {
+			itr = eatAtJoesMenu.getPriceIterator(5);
+				while(itr.hasNext()) {
 			
-					System.out.println(itr1.next().getName());
+					System.out.println(itr.next().getName());
 				}
-			}
-			catch(NullPointerException e) {
-				System.out.println("There are no items left under that price.");
-			}
 			break;
 		
 		
 		
-		case 2: 
-			try {
-				while(itr2.hasNext()) {
+		case 2:
+			itr = eatAtJoesMenu.getHeartHealthyIterator();
+				while(itr.hasNext()) {
 				
-					System.out.println(itr2.next().getName());
+					System.out.println(itr.next().getName());
 					}
-				}
-				catch(NullPointerException e) {
-					System.out.println("There are no healthy items left.");
-				}
 			break;
 		
 		case 3:
-			try {
-				while(itr3.hasNext()) {
-				
-					System.out.println(itr3.next().getName());
-					}
-				}
-				catch(NullPointerException e) {
-					System.out.println("There are no items left in that category.");
+			itr = eatAtJoesMenu.getItemIterator(Menu.MAIN_DISH);
+				while(itr.hasNext()) {
+					System.out.println(itr.next().getName());
 				}
 			break;
 		
 		case 4:
-			try {
-				while(itr4.hasNext()) {
+			itr = eatAtJoesMenu.getAllItemsIterator();
+				while(itr.hasNext()) {
 				
-					System.out.println(itr4.next().getName());
+					System.out.println(itr.next().getName());
 					}
-				}
-				catch(NullPointerException e) {
-					System.out.println("There are no more items left.");
-				}
 			break;
 		}
 		
-		System .out.println("Delete heart healthy Item");
+		System .out.println("Delete Main dishes");
+		itr = eatAtJoesMenu.getAllItemsIterator();
+		
 		// delete all menu items
-		while(itr5.hasNext()) {
+		while(itr.hasNext()) {
 			
-			MenuItem dItem = itr5.next();
-			if(dItem.getHeart())
+			MenuItem dItem = itr.next();
+			if(dItem.getCategory() == Menu.MAIN_DISH)
 				eatAtJoesMenu.delete(dItem);
 		}
 		
+		itr = eatAtJoesMenu.getAllItemsIterator();;
 		try {
-			while(itr6.hasNext()) {
+			while(itr.hasNext()) {
 			
-				System.out.println(itr6.next().getName());
+				System.out.println(itr.next().getName());
 				}
 			}
 			catch(NullPointerException e) {
