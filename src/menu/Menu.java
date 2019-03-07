@@ -164,7 +164,7 @@ public class Menu {
         if (temp == null) return; 
   
         // Unlink the node from linked list
-        numberOfElements --; // not sure if the decrement goes here
+        numberOfElements --;
         prev.next = temp.next;
 	}
 	
@@ -212,11 +212,10 @@ public class Menu {
 		public ItemIterator( int selectedCategory) {
 			
 			temp = head;
-			if(temp != null)
-				while(temp.data.getCategory() != selectedCategory) {
-					temp = temp.getNext();
-				
-					}
+			
+			while((temp != null)&& (temp.data.getCategory() != selectedCategory) ) {
+				temp = temp.getNext();
+				}
 				
 			cursor = temp;
 			selectedCat = selectedCategory;
@@ -300,10 +299,9 @@ public class Menu {
 			public PriceIterator(double Price) {
 				
 				temp = head;
-				if(temp != null)
-					while(temp.data.getPrice() > Price) {
-						temp = temp.getNext();
-						}
+				while( (temp != null) && (temp.data.getPrice() > Price) ) {
+					temp = temp.getNext();
+					}
 				
 				cursor = temp;
 				

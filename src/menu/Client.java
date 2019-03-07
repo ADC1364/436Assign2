@@ -15,14 +15,14 @@ public class Client {
 		eatAtJoesMenu.add("Rice Pudding", Menu.DESSERT, Menu.NOT_HEART_HEALTHY, 3.50);
 		eatAtJoesMenu.add("burger", Menu.MAIN_DISH, Menu.NOT_HEART_HEALTHY, 24.99); 
 		eatAtJoesMenu.add("fries", Menu.APPETIZERS, Menu.NOT_HEART_HEALTHY, 3.50);
-		eatAtJoesMenu.add("shake", Menu.MAIN_DISH, Menu.HEART_HEALTHY, 10.50);
+		eatAtJoesMenu.add("shake", Menu.MAIN_DISH, Menu.NOT_HEART_HEALTHY, 10.50);
 		
 		MenuIterator itr;
-		int option = 1;
+		int option = 4;
 		
 		switch(option) {
 		case 1 :
-			itr = eatAtJoesMenu.getPriceIterator(5);
+			itr = eatAtJoesMenu.getPriceIterator(10.50);
 				while(itr.hasNext()) {
 			
 					System.out.println(itr.next().getName());
@@ -66,16 +66,12 @@ public class Client {
 				eatAtJoesMenu.delete(dItem);
 		}
 		
-		itr = eatAtJoesMenu.getAllItemsIterator();;
-		try {
+		itr = eatAtJoesMenu.getAllItemsIterator();
+		
 			while(itr.hasNext()) {
 			
 				System.out.println(itr.next().getName());
 				}
-			}
-			catch(NullPointerException e) {
-				System.out.println("There are no more items left.");
-			}
 		
 	}
 
