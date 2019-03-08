@@ -1,5 +1,7 @@
 package menu;
 
+import java.util.Scanner;
+
 public class Client {
 
 	public Client() {
@@ -18,14 +20,35 @@ public class Client {
 		eatAtJoesMenu.add("shake", Menu.MAIN_DISH, Menu.NOT_HEART_HEALTHY, 10.50);
 		
 		MenuIterator itr;
-		int option = 4;
+		int option;
+		Scanner input = new Scanner (System.in);
+		String delete;
+		MenuItem item;
+		
+		System.out.println("#####################################");
+		System.out.println("Option 1: Please select a price and the itmes at or below that price will be displayed.");
+		System.out.println("Option 2: Display heart healthy options.");
+		System.out.println("Option 3: Please select a category of a dish and the itmes in that category will be displayed.");
+		System.out.println("Option 4: Display all items in the list.");
+		System.out.println("#####################################");
+		
+		System.out.println("Please enter an option");
+		option =  input.nextInt();
 		
 		switch(option) {
 		case 1 :
-			itr = eatAtJoesMenu.getPriceIterator(10.50);
+			System.out.println("Select a price:");
+			double price = input.nextDouble() ;
+			itr = eatAtJoesMenu.getPriceIterator(price);
 				while(itr.hasNext()) {
 			
-					System.out.println(itr.next().getName());
+					item = itr.next();
+					System.out.println(item.getName());
+					System.out.println("Do you wish to delete this item");
+					delete = input.next();
+					if(delete.contentEquals("d"))
+						eatAtJoesMenu.delete(item);
+					
 				}
 			break;
 		
@@ -34,37 +57,49 @@ public class Client {
 		case 2:
 			itr = eatAtJoesMenu.getHeartHealthyIterator();
 				while(itr.hasNext()) {
-				
-					System.out.println(itr.next().getName());
-					}
+			
+					item = itr.next();
+					System.out.println(item.getName());
+					System.out.println("Do you wish to delete this item");
+					delete = input.next();
+					if(delete.contentEquals("d"))
+						eatAtJoesMenu.delete(item);
+					
+				}
 			break;
 		
 		case 3:
-			itr = eatAtJoesMenu.getItemIterator(Menu.MAIN_DISH);
+			System.out.println("Select a category:");
+			int category = input.nextInt();
+			itr = eatAtJoesMenu.getItemIterator(category);
 				while(itr.hasNext()) {
-					System.out.println(itr.next().getName());
+			
+					item = itr.next();
+					System.out.println(item.getName());
+					System.out.println("Do you wish to delete this item");
+					delete = input.next();
+					if(delete.contentEquals("d"))
+						eatAtJoesMenu.delete(item);
+					
 				}
 			break;
 		
 		case 4:
 			itr = eatAtJoesMenu.getAllItemsIterator();
-				while(itr.hasNext()) {
+			while(itr.hasNext()) {
 				
-					System.out.println(itr.next().getName());
-					}
+				item = itr.next();
+				System.out.println(item.getName());
+				System.out.println("Do you wish to delete this item");
+				delete = input.next();
+				if(delete.contentEquals("d"))
+					eatAtJoesMenu.delete(item);
+				
+			}
 			break;
 		}
 		
-		System .out.println("Delete Main dishes");
-		itr = eatAtJoesMenu.getAllItemsIterator();
-		
-		// delete all menu items
-		while(itr.hasNext()) {
-			
-			MenuItem dItem = itr.next();
-			if(dItem.getCategory() == Menu.MAIN_DISH)
-				eatAtJoesMenu.delete(dItem);
-		}
+		System.out.println("Items left in the list are:");
 		
 		itr = eatAtJoesMenu.getAllItemsIterator();
 		
