@@ -19,6 +19,9 @@ public class Client {
 		eatAtJoesMenu.add("fries", Menu.APPETIZERS, Menu.NOT_HEART_HEALTHY, 3.50);
 		eatAtJoesMenu.add("shake", Menu.MAIN_DISH, Menu.NOT_HEART_HEALTHY, 10.50);
 		
+		eatAtJoesMenu.add("salad", Menu.MAIN_DISH, Menu.HEART_HEALTHY, 24.99); 
+		
+		
 		MenuIterator itr;
 		int option;
 		Scanner input = new Scanner (System.in);
@@ -104,7 +107,7 @@ public class Client {
 			break;
 		}
 		
-		System.out.println("Items left in the list are:");
+		System.out.println("Items left in the menu after deletion are:");
 		
 		itr = eatAtJoesMenu.getAllItemsIterator();
 		
